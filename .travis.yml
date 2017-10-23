@@ -12,6 +12,13 @@ services:
 
 install: true
 
+# use a docker early version as multi stage docker build require
+# docker >= 17.05
+# https://docs.docker.com/engine/userguide/eng-image/multistage-build/
+before_install:
+  - sudo apt-get update
+  - sudo apt-get -y -o Dpkg::Options::="--force-confnew" install docker-ce
+
 before_script:
   - docker build --pull -t $DOCKER_IMAGE_NAME -f Dockerfile .
   - docker run -d -p 666:80 --name caddyserver $DOCKER_IMAGE_NAME

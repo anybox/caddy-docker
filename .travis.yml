@@ -1,0 +1,25 @@
+sudo: required
+
+env:
+  global:
+    - DOCKER_IMAGE_NAME=anybox/caddy
+  matrix:
+    - VERSION=0.10.10
+    - VERSION=0.10.9
+
+services:
+  - docker
+
+install: true
+
+before_script:
+  - docker build --pull -t $DOCKER_IMAGE_NAME -f Dockerfile .
+  - docker run -d -p 666:80 --name caddyserver $DOCKER_IMAGE_NAME
+
+script:
+  - docker ps | grep -q $DOCKER_IMAGE_NAME
+  - sleep 2
+  - curl "http://127.0.0.1:666"
+
+after_success:
+  - if [ ! -z "$TRAVIS_PULL_REQUEST" ]; then docker login --email=$DOCKER_HUB_EMAIL --username=$DOCKER_HUB_USERNAME --password=$DOCKER_HUB_PASSWORD && docker tag $DOCKER_IMAGE_NAME:latest $DOCKER_IMAGE_NAME:$VERSION && docker push $DOCKER_IMAGE_NAME:$VERSION; fi

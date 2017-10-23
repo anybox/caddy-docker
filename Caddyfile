@@ -1,0 +1,18 @@
+# A basic config that server html pages
+http://127.0.0.1 {
+    index /srv/index.html
+}
+
+# Here a basic example of a reverse proxy configuration behind an haproxy
+# that use protocol proxy with (send-proxy)
+
+http://localhost {
+    proxy / http://my_ct:8080 {
+        transparent
+        websocket
+        insecure_skip_verify
+    }
+    gzip
+    timeouts 300s
+    proxyprotocol 0.0.0.0/0
+}

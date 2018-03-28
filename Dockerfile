@@ -1,7 +1,7 @@
 #
 # Builder
 #
-FROM golang:1.9-alpine as builder
+FROM golang:1.10-alpine as builder
 LABEL maintainer "Pierre Verkest <pverkeset@anybox.fr>"
 # This dockerfile insall caddy from source and manage plugins we needs
 # the image provided by abiosoft contains http.git wich we don't want to use
@@ -10,7 +10,7 @@ LABEL maintainer "Pierre Verkest <pverkeset@anybox.fr>"
 # https://github.com/abiosoft/caddy-docker/blob/master/Dockerfile
 
 
-ARG version="0.10.10"
+ARG version="0.10.12"
 
 RUN apk add --no-cache curl git
 
@@ -36,10 +36,10 @@ RUN cd /go/src/github.com/mholt/caddy/caddy \
 #
 # Final stage
 #
-FROM alpine:3.6
+FROM alpine:3.7
 LABEL maintainer "Pierre Verkest <pverkeset@anybox.fr>"
 
-RUN apk add --no-cache openssh-client git dumb-init
+RUN apk add --no-cache openssh-client
 
 # install caddy
 COPY --from=builder /go/bin/caddy /usr/bin/caddy
@@ -51,5 +51,5 @@ RUN /usr/bin/caddy -plugins
 COPY Caddyfile /etc/caddy/Caddyfile
 COPY index.html /srv/index.html
 
-ENTRYPOINT ["dumb-init", "--", "/usr/bin/caddy"]
+ENTRYPOINT ["/usr/bin/caddy"]
 CMD ["--conf", "/etc/caddy/Caddyfile", "--log", "stdout"]

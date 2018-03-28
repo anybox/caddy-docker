@@ -4,8 +4,8 @@ env:
   global:
     - DOCKER_IMAGE_NAME=anybox/caddy
   matrix:
+    - VERSION=0.10.12
     - VERSION=0.10.10
-    - VERSION=0.10.9
 
 services:
   - docker

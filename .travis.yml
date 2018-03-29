@@ -21,12 +21,11 @@ before_install:
 
 before_script:
   - docker build --pull -t $DOCKER_IMAGE_NAME -f Dockerfile .
-  - docker run -d -p 666:80 --name caddyserver $DOCKER_IMAGE_NAME
+  - docker run -d -p 666:80 --name caddyserver -v "$(pwd)/:/etc/caddy/" $DOCKER_IMAGE_NAME
 
 script:
   - docker ps | grep -q $DOCKER_IMAGE_NAME
-  - sleep 2
-  - curl "http://127.0.0.1:666"
+  - ./test_caddy.sh
 
 after_success:
   - if [ ! -z "$TRAVIS_PULL_REQUEST" ]; then docker login -u $DOCKER_HUB_USERNAME -p $DOCKER_HUB_PASSWORD && docker tag $DOCKER_IMAGE_NAME:latest $DOCKER_IMAGE_NAME:$VERSION && docker push $DOCKER_IMAGE_NAME:$VERSION; fi

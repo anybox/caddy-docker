@@ -39,7 +39,7 @@ RUN cd /go/src/github.com/mholt/caddy/caddy \
 FROM alpine:3.7
 LABEL maintainer "Pierre Verkest <pverkeset@anybox.fr>"
 
-RUN apk add --no-cache openssh-client
+RUN apk add --no-cache openssh-client ca-certificates
 
 # install caddy
 COPY --from=builder /go/bin/caddy /usr/bin/caddy

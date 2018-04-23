@@ -13,8 +13,9 @@ https://github.com/abiosoft)**'s works in his [caddy-docker](
 https://github.com/abiosoft/caddy-docker) project.
 
 Abiosoft image contains ``http.git`` pligin wich we don't
-use. Anybox's image contains ``http.proxyprotocol`` from a different
-repo than the one provided by caddy.
+use. Anybox's image contains [http.proxyprotocol](
+https://github.com/petrus-v/caddy-proxyprotocol) and [http.reauth](
+https://github.com/freman/caddy-reauth)
 
 ## How to use
 

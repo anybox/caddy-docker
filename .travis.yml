@@ -21,7 +21,7 @@ before_install:
   - sudo apt-get -y -o Dpkg::Options::="--force-confnew" install docker-ce
 
 before_script:
-  - docker build --pull -t $DOCKER_IMAGE_NAME -f Dockerfile .
+  - docker build --pull --build-arg version=$VERSION -t $DOCKER_IMAGE_NAME -f Dockerfile .
   - docker run -d -p 666:80 --name caddyserver -v "$(pwd)/:/etc/caddy/" $DOCKER_IMAGE_NAME
 
 script:

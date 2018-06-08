@@ -29,4 +29,4 @@ script:
   - ./test_caddy.sh
 
 after_success:
-  - if [ ! -z "$TRAVIS_PULL_REQUEST" ]; then docker login --password-stdin -u $DOCKER_HUB_USERNAME -p $DOCKER_HUB_PASSWORD && docker tag $DOCKER_IMAGE_NAME:latest $DOCKER_IMAGE_NAME:$VERSION && docker push $DOCKER_IMAGE_NAME:$VERSION; fi
+  - if [ ! -z "$TRAVIS_PULL_REQUEST" ]; then docker login -u $DOCKER_HUB_USERNAME -p $DOCKER_HUB_PASSWORD && docker tag $DOCKER_IMAGE_NAME:latest $DOCKER_IMAGE_NAME:$VERSION && docker push $DOCKER_IMAGE_NAME:$VERSION; fi

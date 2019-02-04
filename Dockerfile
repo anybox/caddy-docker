@@ -20,8 +20,8 @@ RUN git clone https://github.com/mholt/caddy --depth 1 -b "v${version}" /go/src/
     && git checkout -b "v${version}"
 
 # http.proxyprotocol plugin
-RUN go get -v -d github.com/petrus-v/caddy-proxyprotocol \
-    && printf "package caddyhttp\nimport _ \"github.com/petrus-v/caddy-proxyprotocol\"" > \
+RUN go get -v -d github.com/mastercactapus/caddy-proxyprotocol \
+    && printf "package caddyhttp\nimport _ \"github.com/mastercactapus/caddy-proxyprotocol\"" > \
         /go/src/github.com/mholt/caddy/caddyhttp/proxyprotocol.go
 
 # builder dependency

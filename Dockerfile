@@ -1,7 +1,7 @@
 #
 # Builder
 #
-FROM golang:1.10-alpine as builder
+FROM golang:1.11-alpine as builder
 LABEL maintainer "Pierre Verkest <pverkeset@anybox.fr>"
 # This dockerfile insall caddy from source and manage plugins we needs
 # the image provided by abiosoft contains http.git wich we don't want to use
@@ -36,7 +36,7 @@ RUN cd /go/src/github.com/mholt/caddy/caddy \
 #
 # Final stage
 #
-FROM alpine:3.7
+FROM alpine:3.8
 LABEL maintainer "Pierre Verkest <pverkeset@anybox.fr>"
 
 RUN apk add --no-cache openssh-client ca-certificates

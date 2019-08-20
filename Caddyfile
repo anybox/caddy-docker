@@ -14,5 +14,4 @@ http://localhost {
     }
     gzip
     timeouts 300s
-    proxyprotocol 0.0.0.0/0
 }

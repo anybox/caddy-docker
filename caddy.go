@@ -5,6 +5,7 @@ import (
 
 	// plugins list:
 	_ "github.com/mastercactapus/caddy-proxyprotocol"
+	_ "github.com/freman/caddy-reauth"
 )
 
 func main() {

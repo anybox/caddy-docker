@@ -5,7 +5,7 @@ https://travis-ci.org/anybox/caddy-docker)
 
 Caddy docker image (caddy is build from source).
 
-This dockerfile insall [caddy server](https://github.com/mholt/caddy)
+This dockerfile insall [caddy server](https://github.com/caddyserver/caddy)
 and plugins from source according our needs.
 
 This works is mainly inspired from **[Abisoft](
@@ -22,7 +22,7 @@ repo than the one provided by caddy.
 This is a most basic run using Caddyfile provide in this repo:
 
 ```bash
-docker run -it anybox/caddy:0.10.10
+docker run -it anybox/caddy:1.0.3
 ```
 
 You may mount your own ``Caddyfile`` (the caddy configuration):
@@ -30,7 +30,7 @@ You may mount your own ``Caddyfile`` (the caddy configuration):
 ```bash
 docker run -it \
     -v "$(pwd)/conf/Caddyfile":/etc/caddy/Caddyfile \
-    anybox/caddy:0.10.10
+    anybox/caddy:1.0.3
 ```
 
 Consult caddy server to learn about [Caddyfile format](
